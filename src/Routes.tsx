@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HomePage } from './home';
+import { AddIngredientPage } from './ingredients';
+import { RecipeSearchPage } from './recipes';
+import { ShoppingListPage } from './shopping-list';
 
 interface RouteProp {
   path: string;
@@ -8,11 +12,23 @@ interface RouteProp {
 const routes: RouteProp[] = [
   {
     path: '/',
-    Component: <h1>title</h1>,
+    Component: <HomePage />,
+  },
+  {
+    path: '/add-ingredient',
+    Component: <AddIngredientPage />,
+  },
+  {
+    path: '/recipes',
+    Component: <RecipeSearchPage />,
+  },
+  {
+    path: '/shopping-list-page',
+    Component: <ShoppingListPage />,
   },
 ];
 
-export const AppRoutes = () => {
+export function AppRoutes() {
   return (
     <Router>
       <Routes>
@@ -22,4 +38,4 @@ export const AppRoutes = () => {
       </Routes>
     </Router>
   );
-};
+}
