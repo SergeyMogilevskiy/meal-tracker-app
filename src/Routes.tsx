@@ -7,24 +7,24 @@ import { ShoppingListPage } from './shopping-list';
 
 interface RouteProp {
   path: string;
-  Component: React.ReactNode;
+  Component: () => JSX.Element;
 }
 const routes: RouteProp[] = [
   {
     path: '/',
-    Component: <HomePage />,
+    Component: HomePage,
   },
   {
     path: '/add-ingredient',
-    Component: <AddIngredientPage />,
+    Component: AddIngredientPage,
   },
   {
     path: '/recipes',
-    Component: <RecipeSearchPage />,
+    Component: RecipeSearchPage,
   },
   {
     path: '/shopping-list-page',
-    Component: <ShoppingListPage />,
+    Component: ShoppingListPage,
   },
 ];
 
@@ -33,7 +33,7 @@ export function AppRoutes() {
     <Router>
       <Routes>
         {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.Component} />
+          <Route key={index} path={route.path} element={<route.Component />} />
         ))}
       </Routes>
     </Router>

@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from 'react';
 
+interface Recipe {
+  _id: string;
+  id: string;
+  name: string;
+  ingredients: { name: string; amount: number; units: string }[];
+
+  originalRecipeLink: string;
+}
+export interface Meal {
+  plannedDate: Date;
+  recipeId: string;
+  _id: string;
+  recipe: Recipe;
+}
+export interface RawMeal extends Omit<Meal, 'plannedDate'> {
+  plannedDate: string;
+}
+
 interface MealsRequestHelpers {
-  meals: any;
+  meals: Meal[];
   isLoading: boolean;
-  setMeals: React.Dispatch<React.SetStateAction<any[]>>;
+  setMeals: React.Dispatch<React.SetStateAction<RawMeal[]>>;
 }
 
 export function useMeals(): MealsRequestHelpers {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [meals, setMeals] = useState<any>([]);
+  const [rawMeals, setRawMeals] = useState<RawMeal[]>([]);
 
   const loadMeals = async () => {
-    setIsLoading(true);
     try {
-      const meals = await fetch('/meals').then((resp) => resp.json());
-      setMeals(meals);
+      const rawMealsResponse = await fetch('/meals').then((resp) => resp.json());
+
+      setRawMeals(rawMealsResponse as RawMeal[]);
     } finally {
       setIsLoading(false);
     }
@@ -24,5 +42,12 @@ export function useMeals(): MealsRequestHelpers {
     loadMeals();
   }, []);
 
-  return { meals, isLoading, setMeals };
+  return {
+    meals: rawMeals.map((rawMeal) => ({
+      ...rawMeal,
+      plannedDate: new Date(rawMeal.plannedDate),
+    })),
+    isLoading,
+    setMeals: setRawMeals,
+  };
 }
