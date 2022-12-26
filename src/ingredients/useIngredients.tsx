@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export function useIngredients() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   useEffect(() => {
     async function loadIngredients() {
@@ -16,4 +16,11 @@ export function useIngredients() {
   }, []);
 
   return { isLoading, ingredients, setIngredients };
+}
+
+export interface Ingredient {
+  name: string;
+  amount: number;
+  units: string;
+  _id: string;
 }

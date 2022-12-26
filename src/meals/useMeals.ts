@@ -1,31 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-interface Recipe {
-  _id: string;
-  id: string;
-  name: string;
-  ingredients: { name: string; amount: number; units: string }[];
-
-  originalRecipeLink: string;
-}
-export interface Meal {
-  plannedDate: Date;
-  recipeId: string;
-  _id: string;
-  recipe: Recipe;
-}
-export interface RawMeal extends Omit<Meal, 'plannedDate'> {
-  plannedDate: string;
-}
-
-interface MealsRequestHelpers {
-  meals: Meal[];
-  isLoading: boolean;
-  setMeals: React.Dispatch<React.SetStateAction<RawMeal[]>>;
-}
-
-export function useMeals(): MealsRequestHelpers {
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+export function useMeals() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [rawMeals, setRawMeals] = useState<RawMeal[]>([]);
 
   const loadMeals = async () => {
@@ -50,4 +26,24 @@ export function useMeals(): MealsRequestHelpers {
     isLoading,
     setMeals: setRawMeals,
   };
+}
+
+interface Recipe {
+  _id: string;
+  id: string;
+  name: string;
+  ingredients: { name: string; amount: number; units: string }[];
+
+  originalRecipeLink: string;
+}
+
+export interface Meal {
+  plannedDate: Date;
+  recipeId: string;
+  _id: string;
+  recipe: Recipe;
+}
+
+export interface RawMeal extends Omit<Meal, 'plannedDate'> {
+  plannedDate: string;
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SmallX } from '../ui';
+import { Ingredient } from './useIngredients';
 
 export function IngredientsListItem({ ingredient }: IngredientsListItemProps): JSX.Element {
   return (
@@ -15,11 +16,6 @@ export function IngredientsListItem({ ingredient }: IngredientsListItemProps): J
   );
 }
 
-export interface IngredientsListItemProps {
-  ingredient: {
-    name: string;
-    amount: number;
-    units: string;
-    _id: string;
-  };
+interface IngredientsListItemProps {
+  ingredient: Ingredient;
 }

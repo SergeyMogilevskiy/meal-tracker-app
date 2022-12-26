@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { IngredientsListItem, IngredientsListItemProps } from './IngredientsListItem';
+import { IngredientsListItem } from './IngredientsListItem';
+import { Ingredient } from './useIngredients';
 
 export function IngredientsList({ isLoading, ingredients }: IngredientsListProps): JSX.Element {
   return (
     <div className="list-container">
       <h1>IngredientsList</h1>
       {isLoading ? (
-        <p>Loading...a</p>
+        <p>Loading...</p>
       ) : (
         ingredients.map((ingredients) => <IngredientsListItem key={ingredients.name} ingredient={ingredients} />)
       )}
@@ -19,6 +20,6 @@ export function IngredientsList({ isLoading, ingredients }: IngredientsListProps
 }
 
 interface IngredientsListProps {
-  ingredients: IngredientsListItemProps['ingredient'][];
+  ingredients: Ingredient[];
   isLoading: boolean;
 }

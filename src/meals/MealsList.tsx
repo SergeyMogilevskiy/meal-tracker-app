@@ -4,11 +4,6 @@ import { Meal } from './useMeals';
 
 const DEBUG_DELAY_DAY = 2;
 
-interface MealsListProps {
-  isLoading: boolean;
-  meals: Meal[];
-}
-
 const nextSevenDays = Array(7)
   .fill(undefined)
   .map((_, i) => {
@@ -35,4 +30,9 @@ export function MealsList({ isLoading, meals }: MealsListProps): JSX.Element {
       )}
     </div>
   );
+}
+
+interface MealsListProps {
+  isLoading: boolean;
+  meals: Meal[];
 }

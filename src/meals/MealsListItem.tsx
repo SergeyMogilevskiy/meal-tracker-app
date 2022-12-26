@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import { SmallX } from '../ui';
 import { Meal } from './useMeals';
 
-interface MealsListItemProps {
-  meal?: Meal;
-  date: Date;
-}
-
 export function MealsListItem({ meal, date }: MealsListItemProps): JSX.Element {
   return (
     <div className="list-item">
@@ -31,4 +26,9 @@ export function MealsListItem({ meal, date }: MealsListItemProps): JSX.Element {
       )}
     </div>
   );
+}
+
+interface MealsListItemProps {
+  meal?: Meal;
+  date: Date;
 }
