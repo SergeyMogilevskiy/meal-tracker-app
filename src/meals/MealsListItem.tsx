@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SmallX } from '../ui';
 import { Meal } from './useMeals';
 
-export function MealsListItem({ meal, date }: MealsListItemProps): JSX.Element {
+export function MealsListItem({ meal, date, onDelete }: MealsListItemProps): JSX.Element {
   return (
     <div className="list-item">
       <h3>{date.getDate()}</h3>
@@ -11,7 +11,7 @@ export function MealsListItem({ meal, date }: MealsListItemProps): JSX.Element {
         <>
           <p>{meal.recipe.name}</p>
           <div className="right-action">
-            <SmallX onClick={() => {}} />
+            <SmallX onClick={() => onDelete(meal._id)} />
           </div>
         </>
       ) : (
@@ -31,4 +31,5 @@ export function MealsListItem({ meal, date }: MealsListItemProps): JSX.Element {
 interface MealsListItemProps {
   meal?: Meal;
   date: Date;
+  onDelete: (id: string) => void;
 }

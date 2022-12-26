@@ -4,9 +4,17 @@ export function useIngredients() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
+  async function onDeleteIngredient(name: string) {
+    const updatedIngredients = await fetch(`/ingredients/${name}`, { method: 'delete' }).then<Ingredient[]>(
+      (response) => response.json()
+    );
+
+    setIngredients(updatedIngredients);
+  }
+
   useEffect(() => {
     async function loadIngredients() {
-      const ingredients = await fetch('/ingredients').then((response) => response.json());
+      const ingredients = await fetch('/ingredients').then<Ingredient[]>((response) => response.json());
 
       setIngredients(ingredients);
       setIsLoading(false);
@@ -15,7 +23,7 @@ export function useIngredients() {
     loadIngredients();
   }, []);
 
-  return { isLoading, ingredients, setIngredients };
+  return { isLoading, ingredients, onDeleteIngredient };
 }
 
 export interface Ingredient {

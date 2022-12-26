@@ -6,13 +6,21 @@ export function useMeals() {
 
   const loadMeals = async () => {
     try {
-      const rawMealsResponse = await fetch('/meals').then((resp) => resp.json());
+      const rawMealsResponse = await fetch('/meals').then<RawMeal[]>((resp) => resp.json());
 
-      setRawMeals(rawMealsResponse as RawMeal[]);
+      setRawMeals(rawMealsResponse);
     } finally {
       setIsLoading(false);
     }
   };
+
+  async function onDeleteMeal(id: string) {
+    const updatedRawMeals = await fetch(`/meals/${id}`, { method: 'delete' }).then<RawMeal[]>((response) =>
+      response.json()
+    );
+
+    setRawMeals(updatedRawMeals);
+  }
 
   useEffect(() => {
     loadMeals();
@@ -25,6 +33,7 @@ export function useMeals() {
     })),
     isLoading,
     setMeals: setRawMeals,
+    onDeleteMeal,
   };
 }
 
@@ -33,7 +42,6 @@ interface Recipe {
   id: string;
   name: string;
   ingredients: { name: string; amount: number; units: string }[];
-
   originalRecipeLink: string;
 }
 
