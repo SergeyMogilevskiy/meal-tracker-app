@@ -37,7 +37,7 @@ export function useMeals() {
   };
 }
 
-interface Recipe {
+export interface Recipe {
   _id: string;
   id: string;
   name: string;

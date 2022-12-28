@@ -18,7 +18,7 @@ export function MealsListItem({ meal, date, onDelete }: MealsListItemProps): JSX
         <>
           <p>No meal planned</p>
           <div className="right-action">
-            <Link to={`recipes?date=${date.toDateString}`}>
+            <Link to={`recipes?date=${date.toString()}`}>
               <button>Add</button>
             </Link>
           </div>
