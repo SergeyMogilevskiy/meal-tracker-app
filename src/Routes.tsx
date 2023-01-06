@@ -23,7 +23,7 @@ const routes: RouteProp[] = [
     Component: RecipeSearchPage,
   },
   {
-    path: '/shopping-list-page',
+    path: '/shopping-list',
     Component: ShoppingListPage,
   },
 ];
